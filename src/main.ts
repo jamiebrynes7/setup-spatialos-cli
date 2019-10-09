@@ -1,19 +1,32 @@
+import fs from 'fs';
+import path from 'path';
 import * as core from '@actions/core';
-import {wait} from './wait'
+import * as proc from 'process';
+import { downloadSpatialCli, getDownloadUrl } from './spatial';
 
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
+    let url = getDownloadUrl();
 
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
+    const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
+    fs.mkdir(destDir, (err) => {
+      throw new Error(err && err.message || "Unknown error occured when creating directory.");
+    });
 
-    core.setOutput('time', new Date().toTimeString());
+    await downloadSpatialCli(url, destDir);
+    core.addPath(destDir);
+
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-run();
+async function main() {
+  try {
+      await run();
+  } catch (error) {
+      core.setFailed(error.message);
+  }
+}
+
+main();

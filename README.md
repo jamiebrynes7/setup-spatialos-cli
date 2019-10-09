@@ -1,14 +1,6 @@
-# Create a JavaScript Action using TypeScript
+# Get SpatialOS CLI Github Actions
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
-
-This template includes compilication support, tests, a validation workflow, publishing, and versioning guidance.  
-
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
+Install the `spatial` CLI for use in Github workflows. 
 
 ## Code in Master
 

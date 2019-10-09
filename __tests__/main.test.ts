@@ -1,23 +1,26 @@
-import {wait} from '../src/wait'
-import * as process from 'process'
-import * as cp from 'child_process'
 import * as path from 'path'
+import * as os from 'os';
+import * as fs from 'fs';
+import { getDownloadUrl, downloadSpatialCli } from '../src/spatial';
+import * as process from 'process';
 
-test('throws invalid number', async() => {
-    await expect(wait('foo')).rejects.toThrow('milleseconds not a number');
+jest.setTimeout(60000);
+
+test('download spatial', async() => {
+    let url = getDownloadUrl();
+    let tmpDir = os.tmpdir();
+    await downloadSpatialCli(url, tmpDir);
+
+    const getExt = () => {
+        switch (process.platform) {
+            case "win32":
+                return ".exe";
+            default:
+                return "";
+        }
+    };
+
+    let expectedPath = path.join(tmpDir, "spatial", getExt());
+
+    fs.exists(path.join(tmpDir, "spatial.exe"), (exists) => expect(exists));
 });
-
-test('wait 500 ms', async() => {
-    const start = new Date();
-    await wait(500);
-    const end = new Date();
-    var delta = Math.abs(end.getTime() - start.getTime());
-    expect(delta).toBeGreaterThan(450);
-});
-
-// shows how the runner will run a javascript action with env / stdout protocol
-test('test runs', () => {
-    process.env['INPUT_MILLISECONDS'] = '500';
-    const ip = path.join(__dirname, '..', 'lib', 'main.js');
-    console.log(cp.execSync(`node ${ip}`).toString());
-})
