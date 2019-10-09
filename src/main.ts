@@ -10,7 +10,7 @@ async function run() {
 
     const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
     fs.mkdir(destDir, (err) => {
-      throw new Error(err && err.message || "Unknown error occured when creating directory.");
+      throw new Error(err && err.message || `Unknown error occured when creating directory: ${destDir}`);
     });
 
     await downloadSpatialCli(url, destDir);
