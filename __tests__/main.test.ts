@@ -7,7 +7,7 @@ import * as process from 'process';
 jest.setTimeout(60000);
 
 test('download spatial', async() => {
-    let url = getDownloadUrl();
+    let url = getDownloadUrl("latest");
     let tmpDir = os.tmpdir();
     await downloadSpatialCli(url, tmpDir);
 
