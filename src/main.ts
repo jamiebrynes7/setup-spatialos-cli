@@ -19,7 +19,13 @@ async function run() {
     await downloadSpatialCli(url, destDir);
     core.addPath(destDir);
 
-    exec.exec("spatial version");
+    exec.exec("spatial version", (err, stdout, stderr) => {
+      core.debug(stdout);
+      core.debug('stderr: ' + stderr);
+      if (err !== null) {
+        core.error(err.message);
+      }
+    });
 
   } catch (error) {
     core.setFailed(error.message);
