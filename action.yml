@@ -5,6 +5,9 @@ inputs:
   version:
     description: 'The version of the Spatial CLI to download.'
     default: 'latest'
+  auth_token:
+    description: 'The auth token to use for the Spatial CLI.'
+    required: true
 runs:
   using: 'node12'
   main: 'lib/main.js'

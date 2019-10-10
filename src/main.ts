@@ -10,20 +10,28 @@ async function run() {
     const version = core.getInput("version");
     const url = getDownloadUrl(version);
 
-    const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
+    const homeDir = proc.env['HOME'] || "~/";
+    const destDir = path.join(homeDir, ".spatial");
     fs.mkdirSync(destDir, {recursive: true});
 
     await downloadSpatialCli(url, destDir);
     core.addPath(destDir);
 
-    exec.exec("spatial version", (err, stdout, stderr) => {
-      core.warning(stdout);
-      core.warning(stderr);
-      if (err !== null) {
-        core.error(err.message);
-      }
+    // Setup configuration
+    const configDir = path.join(homeDir, ".improbable", "oauth2");
+    fs.mkdirSync(configDir, { recursive: true });
+
+    const oauthTokenFile = path.join(configDir, "oauth2_refresh_token");
+    const oauthToken = core.getInput("oauth_token");
+
+    let output = fs.createWriteStream(oauthTokenFile);
+    output.on('error', () => { 
+      throw new Error("Failed to write to oauth token file.") 
     });
 
+    output.write(oauthTokenFile);
+    output.destroy();
+        
   } catch (error) {
     core.setFailed(error.message);
   }
