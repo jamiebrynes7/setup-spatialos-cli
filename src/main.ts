@@ -10,7 +10,9 @@ async function run() {
 
     const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
     fs.mkdir(destDir, {recursive: true}, (err) => {
-      throw err;
+      if (err != null) {
+        throw err;
+      }
     });
 
     await downloadSpatialCli(url, destDir);
