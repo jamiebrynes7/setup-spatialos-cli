@@ -24,7 +24,6 @@ export function getDownloadUrl() : string {
         exeLocation += ".exe";
       }
   
-  
       let req = download(url);
       let output = fs.createWriteStream(exeLocation, {
           mode: 0o755

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as core from '@actions/core';
 import * as proc from 'process';
+import exec from 'child_process';
 import { downloadSpatialCli, getDownloadUrl } from './spatial';
 
 async function run() {
@@ -17,6 +18,8 @@ async function run() {
 
     await downloadSpatialCli(url, destDir);
     core.addPath(destDir);
+
+    exec.exec("spatial version");
 
   } catch (error) {
     core.setFailed(error.message);
