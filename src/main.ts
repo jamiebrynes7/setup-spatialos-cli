@@ -10,18 +10,14 @@ async function run() {
     let url = getDownloadUrl();
 
     const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
-    fs.mkdir(destDir, {recursive: true}, (err) => {
-      if (err != null) {
-        throw err;
-      }
-    });
+    fs.mkdirSync(destDir, {recursive: true});
 
     await downloadSpatialCli(url, destDir);
     core.addPath(destDir);
 
-    exec.exec(`${destDir}/spatial version`, (err, stdout, stderr) => {
+    exec.exec("spatial version", (err, stdout, stderr) => {
       core.debug(stdout);
-      core.debug('stderr: ' + stderr);
+      core.debug(stderr);
       if (err !== null) {
         core.error(err.message);
       }

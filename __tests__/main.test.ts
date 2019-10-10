@@ -20,7 +20,7 @@ test('download spatial', async() => {
         }
     };
 
-    let expectedPath = path.join(tmpDir, "spatial", getExt());
-
+    let expectedPath = path.join(tmpDir, `spatial${getExt()}`);
+    console.log(expectedPath);
     fs.exists(path.join(tmpDir, "spatial.exe"), (exists) => expect(exists));
 });
