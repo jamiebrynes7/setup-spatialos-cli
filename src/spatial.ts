@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import download from 'download';
 import * as proc from 'process';
+import * as core from '@actions/core';
 
 export function getDownloadUrl() : string {
     switch (proc.platform) {
@@ -32,6 +33,7 @@ export function getDownloadUrl() : string {
       req.pipe(output);
       req.on('end', () => {
           output.close();
+          core.debug("Closed file stream.");
           resolve();
       });
       req.on('error', reject);
