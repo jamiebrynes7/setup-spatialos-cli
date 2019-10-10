@@ -4,14 +4,14 @@ import download from 'download';
 import * as proc from 'process';
 import * as core from '@actions/core';
 
-export function getDownloadUrl() : string {
+export function getDownloadUrl(version: string) : string {
     switch (proc.platform) {
       case "win32":
-        return "https://console.improbable.io/toolbelt/download/latest/win";
+        return `https://console.improbable.io/toolbelt/download/${version}/win`;
       case "darwin":
-        return "https://console.improbable.io/toolbelt/download/latest/mac"
+        return `https://console.improbable.io/toolbelt/download/${version}/mac`;
       case "linux":
-        return "https://console.improbable.io/toolbelt/download/latest/linux";
+        return `https://console.improbable.io/toolbelt/download/${version}/linux`;
       default:
         throw new Error(`Unsupported platform: ${proc.platform}.`);
     }
@@ -33,7 +33,6 @@ export function getDownloadUrl() : string {
       req.pipe(output);
       req.on('end', () => {
           output.destroy();
-          core.warning("Closed file stream.");
           resolve();
       });
       req.on('error', reject);

@@ -7,7 +7,8 @@ import { downloadSpatialCli, getDownloadUrl } from './spatial';
 
 async function run() {
   try {
-    let url = getDownloadUrl();
+    const version = core.getInput("version");
+    const url = getDownloadUrl(version);
 
     const destDir = path.join(proc.env['HOME'] || "~/", ".spatial");
     fs.mkdirSync(destDir, {recursive: true});
