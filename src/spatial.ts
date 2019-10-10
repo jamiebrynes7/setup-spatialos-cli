@@ -33,7 +33,7 @@ export function getDownloadUrl() : string {
       req.pipe(output);
       req.on('end', () => {
           output.close();
-          core.debug("Closed file stream.");
+          console.log("Closed file stream.");
           resolve();
       });
       req.on('error', reject);

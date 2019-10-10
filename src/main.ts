@@ -16,8 +16,8 @@ async function run() {
     core.addPath(destDir);
 
     exec.exec("spatial version", (err, stdout, stderr) => {
-      core.debug(stdout);
-      core.debug(stderr);
+      console.log(stdout);
+      console.log(stderr);
       if (err !== null) {
         core.error(err.message);
       }
