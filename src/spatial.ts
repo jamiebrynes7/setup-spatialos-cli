@@ -32,7 +32,7 @@ export function getDownloadUrl() : string {
   
       req.pipe(output);
       req.on('end', () => {
-          output.close();
+          output.destroy();
           core.warning("Closed file stream.");
           resolve();
       });
