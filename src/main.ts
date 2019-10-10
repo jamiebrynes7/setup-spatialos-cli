@@ -15,7 +15,7 @@ async function run() {
     await downloadSpatialCli(url, destDir);
     core.addPath(destDir);
 
-    exec.exec("spatial version", (err, stdout, stderr) => {
+    exec.exec(`ls -lah ${destDir}`, (err, stdout, stderr) => {
       core.warning(stdout);
       core.warning(stderr);
       if (err !== null) {
