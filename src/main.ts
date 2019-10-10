@@ -29,7 +29,7 @@ async function run() {
       throw new Error("Failed to write to oauth token file.") 
     });
 
-    output.write(oauthTokenFile);
+    output.write(oauthToken);
     output.destroy();
 
   } catch (error) {
