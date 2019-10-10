@@ -31,7 +31,7 @@ async function run() {
 
     output.write(oauthTokenFile);
     output.destroy();
-        
+
   } catch (error) {
     core.setFailed(error.message);
   }
