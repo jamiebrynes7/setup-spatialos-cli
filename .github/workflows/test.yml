@@ -17,4 +17,4 @@ jobs:
     - run: npm test
     - uses: ./
       with: 
-        oauth_token: "some token"
+        auth_token: "some token"
