@@ -18,24 +18,23 @@ export function getDownloadUrl(version: string) : string {
   }
   
   export function downloadSpatialCli(url: string, destDir: string) : Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       let exeLocation = path.join(destDir, "spatial");
     
       if (proc.platform == "win32") {
         exeLocation += ".exe";
       }
-  
-      let req = download(url);
-      let output = fs.createWriteStream(exeLocation, {
-          mode: 0o755
-      });
-  
-      req.pipe(output);
-      req.on('end', () => {
-          output.destroy();
+
+      try {
+        await download(url).then((data) => {
+          fs.writeFileSync(exeLocation, data, {
+            mode: 0o755
+          });
           resolve();
-      });
-      req.on('error', reject);
-      output.on('error', reject);
+        });
+      }
+      catch (error) {
+        reject(error);
+      }
     })
   }
