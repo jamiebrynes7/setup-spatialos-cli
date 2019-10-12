@@ -23,14 +23,7 @@ async function run() {
 
     const oauthTokenFile = path.join(configDir, "oauth2_refresh_token");
     const oauthToken = core.getInput("oauth_token");
-
-    let output = fs.createWriteStream(oauthTokenFile);
-    output.on('error', () => { 
-      throw new Error("Failed to write to oauth token file.") 
-    });
-
-    output.write(oauthToken);
-    output.destroy();
+    fs.writeFileSync(oauthTokenFile, oauthToken);
 
   } catch (error) {
     core.setFailed(error.message);
