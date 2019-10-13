@@ -5,6 +5,8 @@ import * as proc from 'process';
 import { downloadSpatialCli, getDownloadUrl, getSpatialOauthConfigDir } from './spatial';
 
 async function run() {
+  core.warning(proc.platform);
+
   const version = core.getInput("version");
   const url = getDownloadUrl(version);
 
