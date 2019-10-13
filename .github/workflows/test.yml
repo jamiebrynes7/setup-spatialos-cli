@@ -1,20 +1,19 @@
-name: "Test typescript-action"
-on:
-  pull_request:
-  push:
-    branches:
-      - master
-      - 'releases/*'
+name: "Test get-spatial-cli-action"
+on: [push]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
 
-    - run: npm ci
+    - run: npm install
     - run: npm run build
     - run: npm test
     - uses: ./
       with: 
-        auth_token: "some token"
+        oauth_token: ${{ secrets.SPATIAL_OAUTH_TOKEN }}
+    - run: spatial package get worker_sdk c_headers 14.0.0 ./test
