@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as core from '@actions/core';
 import * as proc from 'process';
-import { downloadSpatialCli, getDownloadUrl } from './spatial';
+import { downloadSpatialCli, getDownloadUrl, getSpatialOauthConfigDir } from './spatial';
 
 async function run() {
   const version = core.getInput("version");
@@ -16,7 +16,7 @@ async function run() {
   core.addPath(destDir);
 
   // Setup configuration
-  const configDir = path.join(homeDir, ".improbable", "oauth2");
+  const configDir = getSpatialOauthConfigDir();
   fs.mkdirSync(configDir, { recursive: true });
 
   const oauthTokenFile = path.join(configDir, "oauth2_refresh_token");
