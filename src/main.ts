@@ -19,6 +19,8 @@ async function run() {
   const configDir = getSpatialOauthConfigDir();
   fs.mkdirSync(configDir, { recursive: true });
 
+  core.warning(`Created directory: ${configDir}`);
+
   const oauthTokenFile = path.join(configDir, "oauth2_refresh_token");
   const oauthToken = core.getInput("oauth_token");
   fs.writeFileSync(oauthTokenFile, oauthToken);
