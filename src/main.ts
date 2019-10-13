@@ -5,8 +5,6 @@ import * as proc from 'process';
 import { downloadSpatialCli, getDownloadUrl, getSpatialOauthConfigDir } from './spatial';
 
 async function run() {
-  core.warning(proc.platform);
-
   const version = core.getInput("version");
   const url = getDownloadUrl(version);
 
@@ -20,8 +18,6 @@ async function run() {
   // Setup configuration
   const configDir = getSpatialOauthConfigDir();
   fs.mkdirSync(configDir, { recursive: true });
-
-  core.warning(`Created directory: ${configDir}`);
 
   const oauthTokenFile = path.join(configDir, "oauth2_refresh_token");
   const oauthToken = core.getInput("oauth_token");
