@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: jamiebrynes7/get-spatial-cli-action@v1
+      - uses: jamiebrynes7/get-spatial-cli-action@v1.2
         with:
           version: 20190416.094616.a865bb5b54
           oauth_token: "${OAUTH_TOKEN_SECRET}"
@@ -28,7 +28,7 @@ jobs:
 
 | Name         | Required | Description                                 | Type   | Default  |
 |--------------|:--------:|---------------------------------------------|--------|----------|
-| `auth_token` |    ✓     | The auth token to use for the Spatial CLI.  | string |          |
+| `oauth_token` |    ✓     | The auth token to use for the Spatial CLI.  | string |          |
 | `version`    |          | The version of the Spatial CLI to download. | string | "latest" |
 
 ## Developing
