@@ -1,6 +1,6 @@
 # `setup-spatialos-cli` Action
 
-![](https://img.shields.io/badge/license-MIT-blue)
+![GitHub](https://img.shields.io/github/license/jamiebrynes7/setup-spatialos-cli?style=for-the-badge) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jamiebrynes7/setup-spatialos-cli?label=latest&style=for-the-badge)
 
 `setup-spatialos-cli` is a GitHub Action for downloading and installing the [SpatialOS CLI](https://documentation.improbable.io/spatialos-tools/docs/cli-introduction).
 
