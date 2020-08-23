@@ -1,13 +1,13 @@
-name: 'get-spatial-cli'
-description: 'Download the Spatial CLI.'
+name: 'setup-spatialos-cli'
+description: 'Download and install the Spatial CLI.'
 author: 'Jamie Brynes'
 inputs:
   version:
     description: 'The version of the Spatial CLI to download.'
     default: 'latest'
-  auth_token:
-    description: 'The auth token to use for the Spatial CLI.'
+  oauth_token:
+    description: 'The service account oauth token to use for the Spatial CLI.'
     required: true
 runs:
   using: 'node12'
-  main: 'lib/main.js'
+  main: 'dist/index.js'
